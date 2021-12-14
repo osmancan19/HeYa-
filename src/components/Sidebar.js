@@ -10,6 +10,14 @@ import db from '../firebase'
 import { collection, onSnapshot,  query} from '@firebase/firestore'
 import { useStateValue } from './StateProvider'
 
+function ChangeName(name){
+  var names = name.split(' ');
+  var firstName = names[0];
+  var lastName = names[1];
+  firstName = firstName.substr(0,1).toUpperCase()+firstName.substr(1,firstName.length);  
+  lastName = lastName.substr(0,1).toUpperCase()+lastName.substr(1,lastName.length); 
+  return firstName + " " + lastName;
+}
 function Sidebar() {
   const [{user}] = useStateValue()
 
@@ -33,7 +41,8 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar_header">
-        <Avatar src={user.photoURL}/>
+        <Avatar src={user.photoURL}/>   
+        <span className ="user_name" > {ChangeName(user.displayName)}</span>
         <div className="sidebar_headerRight">
           <IconButton>
             <DonutLargeIcon/>
@@ -50,7 +59,9 @@ function Sidebar() {
 
       <div className="sidebar_search">
         <div className="sidebar_searchContainer">
-          <SearchOutlined/>
+          <IconButton>
+            <SearchOutlined/>          
+          </IconButton>
           <input placeholder="Search or start new chat"
             type="text" />
         </div>

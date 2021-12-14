@@ -23,13 +23,16 @@ function Login() {
   return (
     <div className="login">
       <div className="login_container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/225px-WhatsApp.svg.png" alt=""/>
+        <img src="https://i.hizliresim.com/blvh6ey.png" alt=""/>
         <div className="login_text">
-          <h1>Sign into WhatsApp</h1>
+          <h1>Rotary Chat</h1>
+          <br></br>
+          <h2 >Make Your Group Chat</h2>
         </div>
-
+        
         <Button type="submit" onClick={signIn}>
-          Sign In With Google
+          <img src = "https://i.hizliresim.com/7nt742o.png" width="30" height="30" ></img>
+          Sign In With Google Account
         </Button>
       </div>
     </div>

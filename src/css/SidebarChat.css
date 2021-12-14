@@ -20,5 +20,9 @@ a {
 }
 
 .sidebarChat_info {
+  max-width: 300px;
   margin-left: 15px;
+}
+.sidebarChat_info > p {
+  overflow: hidden;
 }

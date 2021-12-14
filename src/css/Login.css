@@ -5,9 +5,14 @@
   display: grid;
   place-items: center;
 }
-
+.login_text>h1 {
+  font-size: 48px;
+}
+.login_text>h2 {
+  font-size: 13px;
+}
 .login_container {
-  padding: 100px;
+  padding: 80px;
   text-align: center;
   background-color: white;
   border-radius: 10px;
@@ -16,13 +21,13 @@
 
 .login_container > img {
   object-fit: contain;
-  height: 100px;
+  height: 180px;
   margin-bottom: 40px;
 }
 
 .login_container > button {
   margin-top: 50px;
   text-transform: inherit !important;
-  background-color: #0a8d48 !important;
+  background-color: #120aa3 !important;
   color: white;
 }

@@ -6,7 +6,38 @@ import '../css/Chat.css'
 import db from '../firebase'
 import { query, addDoc, doc, onSnapshot, collection, orderBy, serverTimestamp } from 'firebase/firestore'
 import { useStateValue } from './StateProvider'
+import SendIcon from '@mui/icons-material/Send';
 
+function formatDate(d,f)
+{
+  var date = new Date(d);
+
+  if(isNaN(date) && f == "header")
+    return "No Message Yet";
+  else{
+    var dd = date.getDate(); 
+    var mm = date.getMonth()+1;
+    var yyyy = date.getFullYear(); 
+    if(dd<10){dd='0'+dd} ;
+    if(mm<10){mm='0'+mm};
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    if(hour<10){hour='0'+hour} 
+    if(min<10){min='0'+min};
+    if(f=="header")
+      return d ="Last Message " + hour+':'+min+' - '+dd+'.'+mm+'.'+yyyy;
+    else
+      return d = hour+':'+min+' - '+dd+'.'+mm+'.'+yyyy;
+  }
+}
+function ChangeName(name){
+  var names = name.split(' ');
+  var firstName = names[0];
+  var lastName = names[1];
+  firstName = firstName.substr(0,1).toUpperCase()+firstName.substr(1,firstName.length);  
+  lastName = lastName.substr(0,1).toUpperCase()+lastName.substr(1,lastName.length); 
+  return firstName + " " + lastName;
+}
 function Chat() {
   const [seed, setSeed] = useState('')
   const [input, setInput] = useState('')
@@ -38,6 +69,11 @@ function Chat() {
 
   const sendMessage = (e) => {
     e.preventDefault()
+    if(input === '')
+    {
+      alert("Type a message.");
+      return;
+    }
     const docRef = doc(db, "rooms", roomId)
     const messageRef = addDoc(collection(docRef, "messages"), {
       message: input,
@@ -54,16 +90,19 @@ function Chat() {
 
         <div className="chat_headerInfo">
           <h3>{roomName}</h3>
-          <p>Last seen {" "}
-            {new Date(messages[messages.length - 1]?.timestamp?.toDate()).toUTCString()}
+          <p>
+            {formatDate(new Date(messages[messages.length - 1]?.timestamp?.toDate()).toUTCString(),"header")}
           </p>
         </div>
 
         <div className="chat_headerRight">
+        <div className="sidebar_searchContainer">
           <IconButton>
-            <SearchOutlined/>
+            <SearchOutlined/>          
           </IconButton>
-
+          <input placeholder="Search Chat"
+            type="text" />
+        </div>
           <IconButton>
             <AttachFile/>
           </IconButton>
@@ -78,20 +117,21 @@ function Chat() {
         {messages.map((message) => (
           <p className={`chat_message ${message.name === user.displayName && "chat_reciever"}`}>
             <span className="chat_name">
-              {message.name}
+              {ChangeName(message.name)}
             </span>
               {message.message}
             <span className="chat_timestamp">
-              {new Date(message.timestamp?.toDate()).toUTCString()}
+              {formatDate(new Date(message.timestamp?.toDate()).toUTCString(),"body")}
             </span>
           </p>
-
+          
         ))}
 
       </div>
 
       <div className="chat_footer">
         <InsertEmoticon/>
+        <Mic/>
         <form>
           <input
             type="text"
@@ -99,12 +139,14 @@ function Chat() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <button 
+         
+          <button              
             type="submit"
-            onClick={sendMessage}
-            >Send a message</button>
+            onClick={sendMessage}> 
+            <SendIcon/>
+          </button>
         </form>
-        <Mic/>
+        
       </div>
     </div>
   )
