@@ -27,7 +27,7 @@ function Login() {
         <div className="login_text">
           <h1>Rotary Chat</h1>
           <br></br>
-          <h2 >Make Your Group Chat</h2>
+          <h2 >Make Your Own Group Chat</h2>
         </div>
         
         <Button type="submit" onClick={signIn}>

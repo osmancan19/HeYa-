@@ -27,7 +27,7 @@ function SidebarChat({ id, name, addNewChat }) {
   }, [])
 
   const createChat = () => {
-    const roomName = prompt("Please Enter Name of Group.")
+    const roomName = prompt("Please Enter A Name of The Group.")
 
     if (roomName) {
       const docRef = addDoc(collection(db, "rooms"), {

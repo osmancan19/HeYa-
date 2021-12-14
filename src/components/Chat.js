@@ -25,9 +25,9 @@ function formatDate(d,f)
     if(hour<10){hour='0'+hour} 
     if(min<10){min='0'+min};
     if(f=="header")
-      return d ="Last Message " + hour+':'+min+' - '+dd+'.'+mm+'.'+yyyy;
+      return "Last Message " + hour+':'+min+' - '+dd+'.'+mm+'.'+yyyy;
     else
-      return d = hour+':'+min+' - '+dd+'.'+mm+'.'+yyyy;
+      return  hour+':'+min+' - '+dd+'.'+mm+'.'+yyyy;
   }
 }
 function ChangeName(name){

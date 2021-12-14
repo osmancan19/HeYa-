@@ -59,7 +59,8 @@
 .chat_name {
   position: absolute;
   top: -23px;
-  left: 4px;
+  left: 1px;
+  word-break:normal;
   font-weight: 600;
   font-size: 15px;
 }
